@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package = "eth-faucet/proto/faucet";
+
+package faucet;
+
+import "google/api/annotations.proto";
+
+service faucet {
+    rpc Request(faucetRequest) returns (faucetResponse) {
+        option (google.api.http) = {
+            post: "/faucet/request",
+            body: "*"
+        };
+    }
+}
+
+message faucetRequest {
+    string wallet_address = 1;
+}
+
+message faucetResponse {
+    string eth_transaction_hash = 1;
+    string token_transaction_hash = 2;
+    string eth_balance = 3;
+    string token_balance = 4;
+}
