@@ -34,7 +34,7 @@ func (ts *RepositoryTestSuite) BeforeTest(suiteName, testName string) {
 }
 
 func (ts *RepositoryTestSuite) TestInsertDocument() {
-	err := db.InsertDocument(ts.client, "db_test", "col_test", "0x7d391b793e208f515a40c08dc87a2af1e53ffd9A", 1, ts.time)
+	err := db.InsertDocument(ts.client, "db_test", "col_test", db.Collection{Address: "0x7d391b793e208f515a40c08dc87a2af1e53ffd9A",Amount: "1", Time: ts.time})
 	assert.NoError(ts.T(), err, "InsertDocument should not return error")
 }
 
@@ -50,7 +50,7 @@ func (ts *RepositoryTestSuite) TestReadDocument() {
 
 func (ts *RepositoryTestSuite) TestUpdateDocument() {
 	updateTime := time.Now()
-	err := db.UpdateDocument(ts.client, "db_test", "col_test", "0x7d391b793e208f515a40c08dc87a2af1e53ffd9A", 10, updateTime)
+	err := db.UpdateDocument(ts.client, "db_test", "col_test", db.Collection{Address:"0x7d391b793e208f515a40c08dc87a2af1e53ffd9A",Amount: "10", Time:updateTime})
 
 	assert.NoError(ts.T(), err, "UpdateDocument should not return error")
 
